@@ -67,9 +67,11 @@ class CustomPage {
 	}
 
 	execRequests(actions) {
-		actions.map(({ method, path, data }) => {
-			this[method](path, data);
-		});
+		return Promise.all(
+			actions.map(({ method, path, data }) => {
+				return this[method](path, data);
+			})
+		);
 	}
 }
 
